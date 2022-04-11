@@ -1,0 +1,51 @@
+:root {
+    --bordergreen: rgb(82, 192, 84);
+    --textgreen: rgb(16, 99, 18);
+}
+
+* {
+    padding: 2px;
+    margin: 1px;
+    color: var(--textgreen);
+    font-family: 'Grape Nuts', cursive;
+    text-align: center;
+}
+
+.title {
+    margin: 0;
+}
+
+.bodyP {
+    height: 100%;
+}
+
+.sideSec {
+    float: left;
+    border: 1px solid var(--bordergreen);
+    min-height: 641px;
+    width: 20%;
+}
+
+.rightSide  {
+    /* border: 1px solid black; */
+    margin-left: 20%;
+}
+
+.alignCards {
+    border: 1px solid var(--bordergreen);
+    min-height: 300px;
+}
+
+.cards {
+    display: flex;
+    /* align-items: center; */
+}
+
+button {
+    display: block;
+    margin: 3px auto;
+    width: 100%;
+    background-color: white;
+    /* border-style: none; */
+    border-color: var(--bordergreen);
+}

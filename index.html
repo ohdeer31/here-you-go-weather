@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.1/dist/css/bootstrap.min.css" integrity="sha384-zCbKRCUGaJDkqS1kPbPd7TveP5iyJE0EjAuZQTgFLD2ylzuqKfdKlfG/eSrtxUkn" crossorigin="anonymous">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Grape+Nuts&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="./asset/style.css">
+    <title>Here You Go Weather Report</title>
+</head>
+<body>
+    <header>
+        <div class="jumbotron-fluid title">
+            <div class="container">
+              <h1 class="display-4">Weather In Your Area</h1>
+            </div>
+        </div>
+    </header>
+    <section class="bodyP">
+        <section class="sideSec">
+            <div class="form-group" id="searchSection">
+                <label>Search for a City:</label>
+                <input class="form-control" type="text" id="cityInputHere" placeholder="Type City Name Here">
+            </div>
+            <button class="btn btn-outline-success btn-block" id="submitBtn">Submit</button>
+            <div id="searchHistory"></div>
+        </section>
+        <section class="rightSide">
+            <section class="alignCards">
+                <div id="todayWeather">
+                    <h3 class="display-6" id="cityName"></h3>
+                    <img class="dailyIcon">
+                    <p class="dailyTemp"></p>
+                    <p class="dailyWind"></p>
+                    <p class="dailyHumidity"></p>
+                    <p id="currentUvi"></p>
+                </div>
+            </section>
+            <section class="alignCards">
+                <section class="cards">
+                    <div class="card border-success mb-3" style="max-width: 18rem;">
+                        <div class="card-header" id="card-header2"></div>
+                        <img class="card-body dailyIcon">
+                        <p class="dailyTemp"></p>
+                        <p class="dailyWind"></p>
+                        <p class="dailyHumidity"></p>
+                    </div>
+                    <div class="card border-success mb-3" style="max-width: 18rem;">
+                        <div class="card-header" id="card-header3"></div>
+                        <img class="card-body dailyIcon">
+                        <p class="dailyTemp"></p>
+                        <p class="dailyWind"></p>
+                        <p class="dailyHumidity"></p>
+                    </div>
+                    <div class="card border-success mb-3" style="max-width: 18rem;">
+                        <div class="card-header" id="card-header4"></div>
+                        <img class="card-body dailyIcon">
+                        <p class="dailyTemp"></p>
+                        <p class="dailyWind"></p>
+                        <p class="dailyHumidity"></p>
+                    </div>
+                    <div class="card border-success mb-3" style="max-width: 18rem;">
+                        <div class="card-header" id="card-header5"></div>
+                        <img class="card-body dailyIcon">
+                        <p class="dailyTemp"></p>
+                        <p class="dailyWind"></p>
+                        <p class="dailyHumidity"></p>
+                    </div>
+                    <div class="card border-success mb-3" style="max-width: 18rem;">
+                        <div class="card-header" id="card-header6"></div>
+                        <img class="card-body dailyIcon">
+                        <p class="dailyTemp"></p>
+                        <p class="dailyWind"></p>
+                        <p class="dailyHumidity"></p>
+                    </div>
+                </section>
+
+            </section>
+        </section>
+    </section>
+    <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.24.0/moment.min.js"></script>
+    <script src="./asset/script.js"></script>
+</body>
+</html>
