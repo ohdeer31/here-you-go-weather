@@ -1,4 +1,6 @@
 console.log(cityInputHere);
+var searchedCity = [];
+var searchedCityBtn = document.querySelector("#searchHistory");
 var now = moment().format("l");
 var day2 = moment().add(1, 'days').endOf('day').format("l");
 var day3 = moment().add(2, 'days').endOf('day').format("l");
@@ -7,6 +9,7 @@ var day5 = moment().add(4, 'days').endOf('day').format("l");
 var day6 = moment().add(5, 'days').endOf('day').format("l");
 
 var getGeoNum = function (city) {
+    var inputString = $("#cityInputHere").val();
     var geoApiUrl = "http://api.openweathermap.org/geo/1.0/direct?q=" + city + "&appid=214eb128431cc12c0daea5af80ed6d50";
     
     fetch(geoApiUrl)
@@ -22,15 +25,22 @@ var getGeoNum = function (city) {
             return response.json();
         })
         .then(function(data) {
-            console.log(data);
-            
+            document.getElementById("dizCards").classList.remove("hidden");
+            $("#currentUvi").empty();
+            $(".dailyIcon").empty();
+            $(".dailyTemp").empty();
+            $(".dailyWind").empty();
+            $(".dailyHumidity").empty();
+            $("#card-header2").text(day2);
+            $("#card-header3").text(day3);
+            $("#card-header4").text(day4);
+            $("#card-header5").text(day5);
+            $("#card-header6").text(day6);
+
             for (var i = 0; i <= 5; i = i + 1) {
                 dailyIcon = data.daily[i].weather[0].icon;
                 var iconurl = "http://openweathermap.org/img/w/" + dailyIcon + ".png";
-                // $('.dailyIcon').attr('src', iconurl);
                 document.getElementsByClassName("dailyIcon")[i].setAttribute("src", iconurl);
-
-                // document.getElementsByClassName("dailyIcon")[i].append(dailyIcon);
 
                 var kal = data.daily[i].temp.day;
                 var fah = (kal - 273.15) * 1.8 + 32;
@@ -49,115 +59,57 @@ var getGeoNum = function (city) {
     })
 }
 
-
 $("#submitBtn").click(function() {
     var inputString = $("#cityInputHere").val();
-    
-    getGeoNum(inputString);
-    
-    // $(".dailyIcon").text("");
-    
-    // var cityName = document.createElement("h3");
-    // var blank = "";
-    // document.getElementById("cityName").append(blank);
-    $("#cityName").empty();
-    $("#currentUvi").empty();
-    $(".dailyIcon").empty();
-    $(".dailyTemp").empty();
-    $(".dailyWind").empty();
-    $(".dailyHumidity").empty();
-    cityName = inputString.replace(/^(.)|\s+(.)/g, c => c.toUpperCase()) + "  " + now;
-    document.getElementById("cityName").append(cityName);
-
-    $("#card-header2").text(day2);
-    $("#card-header3").text(day3);
-    $("#card-header4").text(day4);
-    $("#card-header5").text(day5);
-    $("#card-header6").text(day6);
-
-    // function renderLastCity() {
-    //     var description = localStorage.getItem("cityNameSearched");
-    //     if (description !== null) {
-    //         inputString.textContent = description;
-    //     }
-    // }
-
-
-    // localStorage.setItem("cityNameSearch", inputString);
-    // var searchHistory = document.createElement("button");
-    // searchHistory.textContent = inputString;
-    // document.getElementById("searchHistory").appendChild(searchHistory);
-    // searchHistory.addEventListener("click", function(event) {
-    //     event.preventDefault();
-    //     var description = localStorage.getItem("cityNameSearch");
-    //     if (description !== null) {
-    //         getGeoNum(description);
-    //     }
-    // })
-
-
-    // buttonEl09.addEventListener("click", function(event) {
-    //     event.preventDefault();
-    //     var description = document.querySelector(".description09").value;
-    //     localStorage.setItem("cityNameSearched", description);
-    //     renderLastCity();
-    // })
-
-    
+    if (inputString === "") {
+        return;
+    }
     if (!searchedCity.includes(inputString)) {
         searchedCity.push(inputString);
-        localStorage.setItem("cityNameSearch", inputString);
-    
-        var searchHistory = document.createElement("button");
-        searchHistory.textContent = inputString;
-        document.getElementById("searchHistory").appendChild(searchHistory);
-    
-        var description = localStorage.getItem("cityNameSearch");
-        searchHistory.addEventListener("click", function(event) {
-            event.preventDefault();
-            if (description !== null) {
-                getGeoNum(description);
-    
-                $("#cityName").empty();
-                $("#currentUvi").empty();
-                $(".dailyIcon").empty();
-                $(".dailyTemp").empty();
-                $(".dailyWind").empty();
-                $(".dailyHumidity").empty();
-                cityName = inputString.replace(/^(.)|\s+(.)/g, c => c.toUpperCase()) + "  " + now;
-                document.getElementById("cityName").append(cityName);
-            }
-        })
+        renderCityName();
     }
-    console.log(searchedCity);
-
+    $("#cityName").empty();
+    city = inputString.replace(/^(.)|\s+(.)/g, c => c.toUpperCase()) + "  " + now;
+    document.getElementById("cityName").append(city);
+    getGeoNum(inputString);
+    storeCities();
+    renderCityName();
 });
 
-var searchedCity = [];
+function storeCities() {
+    localStorage.setItem("cityNameSearch", JSON.stringify(searchedCity));
+}
 
-// $("#submitBtn").click(function() {
-//     var inputString = $("#cityInputHere").val();
+function init() {
+    var storedCities = JSON.parse(localStorage.getItem("cityNameSearch"));
+    if (storedCities) {
+        searchedCity = storedCities;
+    }
+    storeCities();
+    renderCityName();
+}
 
-//     localStorage.setItem("cityNameSearch", inputString);
+function renderCityName() {
+    searchedCityBtn.innerHTML = "";
 
-//     var searchHistory = document.createElement("button");
-//     searchHistory.textContent = inputString;
-//     document.getElementById("searchHistory").appendChild(searchHistory);
+    for (var i = searchedCity.length - 1; i >= 0; i--) {
+        
+        var cityBtn = document.createElement("button");
+        cityBtn.classList.add("myCityBtn");
+        cityBtn.textContent = searchedCity[i];
+        document.getElementById("searchHistory").appendChild(cityBtn);
+    }
+}
 
-//     var description = localStorage.getItem("cityNameSearch");
-//     searchHistory.addEventListener("click", function(event) {
-//         event.preventDefault();
-//         if (description !== null) {
-//             getGeoNum(description);
+searchedCityBtn.addEventListener("click", function(event) {
+    var element = event.target;
+    if (element.matches(".myCityBtn") === true) {
+        var city = element.textContent;
+        getGeoNum(city);
+        $("#cityName").empty();
+        city = city.replace(/^(.)|\s+(.)/g, c => c.toUpperCase()) + "  " + now;
+        document.getElementById("cityName").append(city);
+    }
+})
 
-//             $("#cityName").empty();
-//             $("#currentUvi").empty();
-//             $(".dailyIcon").empty();
-//             $(".dailyTemp").empty();
-//             $(".dailyWind").empty();
-//             $(".dailyHumidity").empty();
-//             cityName = inputString.replace(/^(.)|\s+(.)/g, c => c.toUpperCase()) + "  " + now;
-//             document.getElementById("cityName").append(cityName);
-//         }
-//     })
-// });
+init();

@@ -9,6 +9,7 @@
     color: var(--textgreen);
     font-family: 'Grape Nuts', cursive;
     text-align: center;
+    border-radius: 5px;
 }
 
 .title {
@@ -27,7 +28,6 @@
 }
 
 .rightSide  {
-    /* border: 1px solid black; */
     margin-left: 20%;
 }
 
@@ -38,7 +38,11 @@
 
 .cards {
     display: flex;
-    /* align-items: center; */
+    justify-content: center;
+}
+
+.hidden {
+    display: none;
 }
 
 button {
@@ -46,6 +50,5 @@ button {
     margin: 3px auto;
     width: 100%;
     background-color: white;
-    /* border-style: none; */
     border-color: var(--bordergreen);
 }
