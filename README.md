@@ -13,3 +13,5 @@ Type in the city name you would like to search, and click submit.
 ## Features
 
 Cities that users entered will be saved in local storage. Users searched cities will appear under the submit button as functioning buttons. As users reload the page, the functioning buttons stay where they were. The button will not be generated twice if the same city name is entered.
+
+![alt text](./asset/Screen%20Shot%202022-04-11%20at%2010.27.49%20PM.png)
