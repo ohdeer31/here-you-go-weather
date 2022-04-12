@@ -10,7 +10,7 @@ var day6 = moment().add(5, 'days').endOf('day').format("l");
 
 var getGeoNum = function (city) {
     var inputString = $("#cityInputHere").val();
-    var geoApiUrl = "http://api.openweathermap.org/geo/1.0/direct?q=" + city + "&appid=214eb128431cc12c0daea5af80ed6d50";
+    var geoApiUrl = "https://api.openweathermap.org/geo/1.0/direct?q=" + city + "&appid=214eb128431cc12c0daea5af80ed6d50";
     
     fetch(geoApiUrl)
     .then(function(response) {
@@ -39,7 +39,7 @@ var getGeoNum = function (city) {
 
             for (var i = 0; i <= 5; i = i + 1) {
                 dailyIcon = data.daily[i].weather[0].icon;
-                var iconurl = "http://openweathermap.org/img/w/" + dailyIcon + ".png";
+                var iconurl = "https://openweathermap.org/img/w/" + dailyIcon + ".png";
                 document.getElementsByClassName("dailyIcon")[i].setAttribute("src", iconurl);
 
                 var kal = data.daily[i].temp.day;
